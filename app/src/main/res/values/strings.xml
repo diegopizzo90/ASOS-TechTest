@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">ASOS-TechTest</string>
+    <string name="title_app_name">SpaceX</string>
+    <string name="company_info">%s was founded by %s in %s. It has now %s employees, %s launch sites, and is valued at USD %s</string>
+    <string name="company">Company</string>
+    <string name="launches">Launches</string>
+    <string name="mission_label">Mission:</string>
+    <string name="date_time_label">Date/time:</string>
+    <string name="date_time_value">%s at %s</string>
+    <string name="rocket_label">Rocket:</string>
+    <string name="rocket_value">%s/%s</string>
+    <string name="from">from</string>
+    <string name="since">since</string>
+    <string name="days_label">Days %s now</string>
+    <string name="not_available">N/A</string>
+    <string name="not_available_launches">No launches available</string>
+    <string name="not_available_wiki">Wikipedia link not available</string>
 </resources>
