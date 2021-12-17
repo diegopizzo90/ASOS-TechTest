@@ -6,3 +6,7 @@ package com.diegopizzo.network.base
 fun Boolean?.isTrue(): Boolean {
     return this == true
 }
+
+fun Boolean?.isFalse(): Boolean {
+    return this == false
+}
