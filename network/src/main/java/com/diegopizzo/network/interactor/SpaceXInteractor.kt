@@ -19,7 +19,9 @@ internal class SpaceXInteractor(
                 creator.fromModelToDataModel(companyInfoResult, launches)
             }
 
-        return Single.zip(getCompanyInfo(), getLaunches(), zipper)
+        return Single.zip(getCompanyInfo(), getLaunches(), zipper).onErrorReturn {
+            SpaceXDataModel(null, emptyList())
+        }
     }
 
     private fun getLaunches(): Single<List<LaunchDataModel>> {
