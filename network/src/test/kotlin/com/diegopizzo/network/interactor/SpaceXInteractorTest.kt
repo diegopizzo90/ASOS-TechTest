@@ -130,7 +130,10 @@ class SpaceXInteractorTest {
                     "5e9d0d95eda69955f709d1eb",
                     success = false,
                     upcoming = false,
-                    Links("https://en.wikipedia.org/wiki/DemoSat")
+                    Links(
+                        "https://en.wikipedia.org/wiki/DemoSat",
+                        Patch("https://images2.imgbox.com/40/e3/GypSkayF_o.png")
+                    )
                 ),
                 Launch(
                     "SES-12",
@@ -138,7 +141,10 @@ class SpaceXInteractorTest {
                     "5e9d0d95eda69973a809d1ec",
                     success = true,
                     upcoming = false,
-                    Links("https://en.wikipedia.org/wiki/SES-12")
+                    Links(
+                        "https://en.wikipedia.org/wiki/SES-12",
+                        Patch("https://images2.imgbox.com/4b/b9/oS8ezl6V_o.png")
+                    )
                 ),
                 Launch(
                     "Trailblazer",
@@ -146,7 +152,10 @@ class SpaceXInteractorTest {
                     "5e9d0d95eda69955f709d1eb",
                     success = false,
                     upcoming = false,
-                    Links("https://en.wikipedia.org/wiki/Trailblazer_(satellite)")
+                    Links(
+                        "https://en.wikipedia.org/wiki/Trailblazer_(satellite)",
+                        Patch("https://images2.imgbox.com/3d/86/cnu0pan8_o.png")
+                    )
                 ),
                 Launch(
                     "NROL-87",
@@ -154,7 +163,7 @@ class SpaceXInteractorTest {
                     "5e9d0d95eda69973a809d1ec",
                     success = null,
                     upcoming = true,
-                    Links(null)
+                    Links(null, null)
                 )
             )
         )
@@ -169,7 +178,8 @@ class SpaceXInteractorTest {
                 "RocketType",
                 isSuccess = false,
                 isUpcoming = false,
-                "https://en.wikipedia.org/wiki/DemoSat"
+                "https://en.wikipedia.org/wiki/DemoSat",
+                "https://images2.imgbox.com/40/e3/GypSkayF_o.png"
             ),
             LaunchDataModel(
                 "SES-12",
@@ -178,7 +188,8 @@ class SpaceXInteractorTest {
                 "RocketType",
                 isSuccess = true,
                 isUpcoming = false,
-                "https://en.wikipedia.org/wiki/SES-12"
+                "https://en.wikipedia.org/wiki/SES-12",
+                "https://images2.imgbox.com/4b/b9/oS8ezl6V_o.png"
             ),
             LaunchDataModel(
                 "Trailblazer",
@@ -187,7 +198,8 @@ class SpaceXInteractorTest {
                 "RocketType",
                 isSuccess = false,
                 isUpcoming = false,
-                "https://en.wikipedia.org/wiki/Trailblazer_(satellite)"
+                "https://en.wikipedia.org/wiki/Trailblazer_(satellite)",
+                "https://images2.imgbox.com/3d/86/cnu0pan8_o.png"
             ),
             LaunchDataModel(
                 "NROL-87",
@@ -196,6 +208,7 @@ class SpaceXInteractorTest {
                 "RocketType",
                 isSuccess = null,
                 isUpcoming = true,
+                null,
                 null
             )
         )
@@ -223,7 +236,8 @@ class SpaceXInteractorTest {
                 null,
                 isSuccess = false,
                 isUpcoming = false,
-                "https://en.wikipedia.org/wiki/DemoSat"
+                "https://en.wikipedia.org/wiki/DemoSat",
+                "https://images2.imgbox.com/40/e3/GypSkayF_o.png"
             ),
             LaunchDataModel(
                 "SES-12",
@@ -232,7 +246,8 @@ class SpaceXInteractorTest {
                 null,
                 isSuccess = true,
                 isUpcoming = false,
-                "https://en.wikipedia.org/wiki/SES-12"
+                "https://en.wikipedia.org/wiki/SES-12",
+                "https://images2.imgbox.com/4b/b9/oS8ezl6V_o.png"
             ),
             LaunchDataModel(
                 "Trailblazer",
@@ -241,7 +256,8 @@ class SpaceXInteractorTest {
                 null,
                 isSuccess = false,
                 isUpcoming = false,
-                "https://en.wikipedia.org/wiki/Trailblazer_(satellite)"
+                "https://en.wikipedia.org/wiki/Trailblazer_(satellite)",
+                "https://images2.imgbox.com/3d/86/cnu0pan8_o.png"
             ),
             LaunchDataModel(
                 "NROL-87",
@@ -250,6 +266,7 @@ class SpaceXInteractorTest {
                 null,
                 isSuccess = null,
                 isUpcoming = true,
+                null,
                 null
             )
         )

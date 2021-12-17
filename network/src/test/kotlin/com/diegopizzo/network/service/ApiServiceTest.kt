@@ -147,7 +147,10 @@ class ApiServiceTest {
                 "5e9d0d95eda69955f709d1eb",
                 success = false,
                 upcoming = false,
-                Links("https://en.wikipedia.org/wiki/DemoSat")
+                Links(
+                    "https://en.wikipedia.org/wiki/DemoSat",
+                    Patch("https://images2.imgbox.com/3c/0e/T8iJcSN3_o.png")
+                )
             ),
             Launch(
                 "SES-12",
@@ -155,7 +158,10 @@ class ApiServiceTest {
                 "5e9d0d95eda69973a809d1ec",
                 success = true,
                 upcoming = false,
-                Links("https://en.wikipedia.org/wiki/SES-12")
+                Links(
+                    "https://en.wikipedia.org/wiki/SES-12",
+                    Patch("https://images2.imgbox.com/4b/b9/oS8ezl6V_o.png")
+                )
             ),
             Launch(
                 "Trailblazer",
@@ -163,7 +169,10 @@ class ApiServiceTest {
                 "5e9d0d95eda69955f709d1eb",
                 success = false,
                 upcoming = false,
-                Links("https://en.wikipedia.org/wiki/Trailblazer_(satellite)")
+                Links(
+                    "https://en.wikipedia.org/wiki/Trailblazer_(satellite)",
+                    Patch("https://images2.imgbox.com/3d/86/cnu0pan8_o.png")
+                )
             ),
             Launch(
                 "NROL-87",
@@ -171,7 +180,7 @@ class ApiServiceTest {
                 "5e9d0d95eda69973a809d1ec",
                 success = null,
                 upcoming = true,
-                Links(null)
+                Links(null, Patch(null))
             )
         )
 
