@@ -64,7 +64,7 @@ class SpaceXCacheInteractorTest {
         server.enqueueResponse("company_info_success_response.json", 200)
         //First request, cache empty response retrieved from the API and saved in the cache
         cache.getCompanyInfo().subscribe(observerCompanyInfo)
-        val request1 = server.takeRequest(200, TimeUnit.MILLISECONDS)
+        val request1 = server.takeRequest(300, TimeUnit.MILLISECONDS)
         assertEquals(request1?.path, BASE_URL + COMPANY_INFO_ENDPOINT)
 
         //Second request, cache not empty response retrieved from the cache. API not called

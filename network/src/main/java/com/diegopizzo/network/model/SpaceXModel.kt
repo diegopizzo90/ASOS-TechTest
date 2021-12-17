@@ -11,7 +11,8 @@ internal data class CompanyInfo(
     val valuation: Long?
 )
 
-internal data class Links(val wikipedia: String?)
+internal data class Patch(val small: String?)
+internal data class Links(val wikipedia: String?, val patch: Patch?)
 internal data class Launch(
     val name: String,
     @SerializedName("date_utc") val dateUtc: String,
@@ -45,5 +46,6 @@ data class LaunchDataModel(
     val rocketType: String?,
     val isSuccess: Boolean?,
     val isUpcoming: Boolean,
-    val wikipediaLink: String?
+    val wikipediaLink: String?,
+    val patchImage: String?
 )

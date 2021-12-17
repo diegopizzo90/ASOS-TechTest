@@ -30,7 +30,8 @@ internal class SpaceXCreator : ISpaceXCreator {
             rocket?.engines?.type,
             launch.success,
             launch.upcoming,
-            launch.links?.wikipedia
+            launch.links?.wikipedia,
+            launch.links?.patch?.small
         )
     }
 }
