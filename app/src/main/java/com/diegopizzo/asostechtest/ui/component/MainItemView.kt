@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -121,13 +122,13 @@ class MainItemView(context: Context, attrs: AttributeSet) : ConstraintLayout(con
             tvLabelText6.text = labelText6
             tvLabelText7.text = labelText7
             tvLabelText8.text = labelText8
-            if (smallIconRes != null) {
-                Glide.with(this@MainItemView).load(smallIconRes)
-                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                    .into(ivSmallIcon)
-            } else {
-                ivSmallIcon.visibility = GONE
-            }
+
+            ivSmallIcon.visibility = View.VISIBLE
+            Glide.with(this@MainItemView)
+                .load(smallIconRes)
+                .placeholder(R.drawable.ic_question_mark_black)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .into(ivSmallIcon)
         }
     }
 }

@@ -131,6 +131,7 @@ class MainFragment : FragmentViewBinding<FragmentMainBinding>(), MainAdapter.Ada
         binding.recyclerView.apply {
             adapter = mainAdapter
             layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
         }
         mainAdapter?.onAdapterEvent = this
     }
