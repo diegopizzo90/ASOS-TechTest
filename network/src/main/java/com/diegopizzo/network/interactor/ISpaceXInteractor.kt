@@ -4,5 +4,5 @@ import com.diegopizzo.network.model.SpaceXDataModel
 import io.reactivex.Single
 
 interface ISpaceXInteractor {
-    fun getSpaceXInfo(): Single<SpaceXDataModel>
+    fun getSpaceXInfo(isFresh: Boolean = false): Single<SpaceXDataModel>
 }

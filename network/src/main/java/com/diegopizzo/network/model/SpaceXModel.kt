@@ -14,6 +14,7 @@ internal data class CompanyInfo(
 internal data class Patch(val small: String?)
 internal data class Links(val wikipedia: String?, val patch: Patch?)
 internal data class Launch(
+    val id: String,
     val name: String,
     @SerializedName("date_utc") val dateUtc: String,
     val rocket: String,
@@ -40,6 +41,7 @@ data class CompanyInfoDataModel(
 )
 
 data class LaunchDataModel(
+    val id: String,
     val missionName: String,
     val dateTimeUtc: String,
     val rocketName: String?,

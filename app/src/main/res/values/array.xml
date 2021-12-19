@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="order_array">
+        <item>Any</item>
+        <item>Asc</item>
+        <item>Desc</item>
+    </string-array>
+
+    <string-array name="launch_outcome_array">
+        <item>Any</item>
+        <item>Success Launch</item>
+        <item>Failed Launch</item>
+    </string-array>
+</resources>

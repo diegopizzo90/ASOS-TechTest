@@ -24,6 +24,7 @@ internal class SpaceXCreator : ISpaceXCreator {
 
     override fun fromLaunchesModelToDataModel(launch: Launch, rocket: Rocket?): LaunchDataModel {
         return LaunchDataModel(
+            launch.id,
             launch.name,
             launch.dateUtc,
             rocket?.name,

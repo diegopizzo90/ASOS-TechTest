@@ -7,7 +7,7 @@ import io.reactivex.Single
 import retrofit2.Response
 
 internal interface ISpaceXCacheInteractor {
-    fun getCompanyInfo(): Single<Response<CompanyInfo>>
-    fun getLaunches(): Single<Response<List<Launch>>>
-    fun getRocketById(id: String): Single<Response<Rocket>>
+    fun getCompanyInfo(isFresh: Boolean = false): Single<Response<CompanyInfo>>
+    fun getLaunches(isFresh: Boolean = false): Single<Response<List<Launch>>>
+    fun getRocketById(id: String, isFresh: Boolean = false): Single<Response<Rocket>>
 }

@@ -8,6 +8,7 @@ import com.dropbox.android.external.store4.Fetcher
 import com.dropbox.android.external.store4.MemoryPolicy
 import com.dropbox.android.external.store4.Store
 import com.dropbox.android.external.store4.StoreBuilder
+import com.dropbox.store.rx2.freshSingle
 import com.dropbox.store.rx2.getSingle
 import com.dropbox.store.rx2.ofSingle
 import io.reactivex.Single
@@ -43,16 +44,28 @@ internal class SpaceXCacheInteractor(
             .build()
 
 
-    override fun getCompanyInfo(): Single<Response<CompanyInfo>> {
-        return companyInfoStore.getSingle(NO_KEY)
+    override fun getCompanyInfo(isFresh: Boolean): Single<Response<CompanyInfo>> {
+        return if (isFresh) {
+            companyInfoStore.freshSingle(NO_KEY)
+        } else {
+            companyInfoStore.getSingle(NO_KEY)
+        }
     }
 
-    override fun getLaunches(): Single<Response<List<Launch>>> {
-        return launchesStore.getSingle(NO_KEY)
+    override fun getLaunches(isFresh: Boolean): Single<Response<List<Launch>>> {
+        return if (isFresh) {
+            launchesStore.freshSingle(NO_KEY)
+        } else {
+            launchesStore.getSingle(NO_KEY)
+        }
     }
 
-    override fun getRocketById(id: String): Single<Response<Rocket>> {
-        return rocketStore.getSingle(id)
+    override fun getRocketById(id: String, isFresh: Boolean): Single<Response<Rocket>> {
+        return if (isFresh) {
+            rocketStore.freshSingle(id)
+        } else {
+            rocketStore.getSingle(id)
+        }
     }
 
     companion object {
