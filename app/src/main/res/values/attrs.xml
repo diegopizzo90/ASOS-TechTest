@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleBarView">
+        <attr name="title_bar" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="MainItemView">
+        <attr name="icon_image" format="reference" />
+        <attr name="label_text_1" format="reference" />
+        <attr name="label_text_2" format="reference" />
+        <attr name="label_text_3" format="reference" />
+        <attr name="label_text_4" format="reference" />
+        <attr name="label_text_5" format="reference" />
+        <attr name="label_text_6" format="reference" />
+        <attr name="label_text_7" format="reference" />
+        <attr name="label_text_8" format="reference" />
+        <attr name="small_icon_image" format="reference" />
+    </declare-styleable>
+</resources>

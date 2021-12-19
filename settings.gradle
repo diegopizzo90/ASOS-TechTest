@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ASOS-TechTest"
 include ':app'
+include ':network'
