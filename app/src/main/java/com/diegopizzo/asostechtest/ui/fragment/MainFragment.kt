@@ -1,51 +1,74 @@
-package com.diegopizzo.asostechtest.ui
+package com.diegopizzo.asostechtest.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.diegopizzo.asostechtest.R
 import com.diegopizzo.asostechtest.databinding.FragmentMainBinding
+import com.diegopizzo.asostechtest.ui.FilterDialogViewState
+import com.diegopizzo.asostechtest.ui.MainAdapter
+import com.diegopizzo.asostechtest.ui.MainViewModel
+import com.diegopizzo.asostechtest.ui.MainViewState
 import com.diegopizzo.asostechtest.ui.base.FragmentViewBinding
 import com.diegopizzo.network.base.isTrue
 import com.diegopizzo.network.model.CompanyInfoDataModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.core.parameter.parametersOf
 
-class MainFragment : FragmentViewBinding<FragmentMainBinding>() {
+class MainFragment : FragmentViewBinding<FragmentMainBinding>(), MainAdapter.AdapterEvent {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentMainBinding
         get() = FragmentMainBinding::inflate
 
-    private val viewModel: MainViewModel by sharedViewModel()
+    private val viewModel: MainViewModel by sharedViewModel {
+        parametersOf(findNavController())
+    }
 
     private var mainAdapter: MainAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.viewStates.observe(viewLifecycleOwner, viewStateObserver)
+        viewModel.filterViewStates.observe(viewLifecycleOwner, filterViewStateObserver)
         setRecyclerView()
         viewModel.getSpaceXInformation()
     }
 
     private val viewStateObserver = Observer<MainViewState> { viewState ->
-        if (viewState.isLoading.isTrue()) {
-            binding.progressBar.visibility = View.VISIBLE
-            loadingCompanyInfo()
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+        viewState.apply {
+            if (isLoading.isTrue()) {
+                binding.progressBar.visibility = View.VISIBLE
+                loadingCompanyInfo()
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
 
-        viewState.spaceXInformation?.apply {
-            launches?.let { launches -> mainAdapter?.addLaunches(launches) }
-            companyInfo?.let { info -> setCompanyInfo(info) }
-        }
+            spaceXInformation?.apply {
+                launches?.let { launches ->
+                    mainAdapter?.submitList(launches, viewModel.filterViewState.queryFilter)
+                }
+                companyInfo?.let { info -> setCompanyInfo(info) }
+            }
 
-        if (viewState.isLaunchesNotAvailable.isTrue()) {
-            binding.tvEmptyLaunches.visibility = View.VISIBLE
-        } else {
-            binding.tvEmptyLaunches.visibility = View.GONE
+            if (isLaunchesNotAvailable.isTrue()) {
+                binding.tvEmptyLaunches.visibility = View.VISIBLE
+            } else {
+                binding.tvEmptyLaunches.visibility = View.GONE
+            }
+        }
+    }
+
+    private val filterViewStateObserver = Observer<FilterDialogViewState> { filterViewState ->
+        filterViewState.apply {
+            if (isFilterPerforming) {
+                viewModel.viewState.spaceXInformation?.launches?.let {
+                    mainAdapter?.submitList(it, queryFilter)
+                }
+            }
         }
     }
 
@@ -102,5 +125,15 @@ class MainFragment : FragmentViewBinding<FragmentMainBinding>() {
             adapter = mainAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+        mainAdapter?.onAdapterEvent = this
+    }
+
+    override fun onEmptyListFiltered() {
+        viewModel.noLaunchesAvailable()
+    }
+
+    override fun onSuccessListFiltered() {
+        binding.tvEmptyLaunches.visibility = View.GONE
+        binding.progressBar.visibility = View.GONE
     }
 }
