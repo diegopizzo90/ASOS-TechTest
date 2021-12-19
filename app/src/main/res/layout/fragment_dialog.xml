@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mstb="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_from_year_selected_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/from_year_selected"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            mstb:layout_constraintBottom_toTopOf="@+id/btn_from_date_picker"
+            mstb:layout_constraintEnd_toStartOf="@id/tv_from_year_selected"
+            mstb:layout_constraintStart_toStartOf="parent"
+            mstb:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_from_year_selected"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/any_year"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            mstb:layout_constraintBottom_toBottomOf="@+id/tv_from_year_selected_label"
+            mstb:layout_constraintEnd_toEndOf="parent"
+            mstb:layout_constraintStart_toEndOf="@id/tv_from_year_selected_label"
+            mstb:layout_constraintTop_toTopOf="@+id/tv_from_year_selected_label" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_from_date_picker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@color/dark_gray"
+            android:text="@string/select_year"
+            android:textColor="@color/light_gray"
+            mstb:layout_constraintBottom_toTopOf="@+id/spacer1"
+            mstb:layout_constraintEnd_toStartOf="@id/btn_from_date_picker_reset"
+            mstb:layout_constraintStart_toStartOf="parent"
+            mstb:layout_constraintTop_toBottomOf="@id/tv_from_year_selected" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_from_date_picker_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/dark_gray"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/reset_year"
+            android:textColor="@color/light_gray"
+            mstb:layout_constraintBottom_toBottomOf="@+id/btn_from_date_picker"
+            mstb:layout_constraintEnd_toEndOf="parent"
+            mstb:layout_constraintStart_toEndOf="@id/btn_from_date_picker" />
+
+        <View
+            android:id="@+id/spacer1"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/dark_gray"
+            mstb:layout_constraintBottom_toTopOf="@id/tv_to_year_selected_label"
+            mstb:layout_constraintEnd_toEndOf="parent"
+            mstb:layout_constraintStart_toStartOf="parent"
+            mstb:layout_constraintTop_toBottomOf="@+id/btn_from_date_picker" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_to_year_selected_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/to_year_selected"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            mstb:layout_constraintBottom_toTopOf="@+id/btn_to_date_picker"
+            mstb:layout_constraintEnd_toStartOf="@id/tv_to_year_selected"
+            mstb:layout_constraintStart_toStartOf="parent"
+            mstb:layout_constraintTop_toBottomOf="@+id/spacer1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_to_year_selected"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/any_year"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            mstb:layout_constraintBottom_toBottomOf="@+id/tv_to_year_selected_label"
+            mstb:layout_constraintEnd_toEndOf="parent"
+            mstb:layout_constraintStart_toEndOf="@id/tv_to_year_selected_label"
+            mstb:layout_constraintTop_toTopOf="@id/tv_to_year_selected_label" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_to_date_picker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:background="@color/dark_gray"
+            android:text="@string/select_year"
+            android:textColor="@color/light_gray"
+            mstb:layout_constraintBottom_toTopOf="@+id/spacer2"
+            mstb:layout_constraintEnd_toStartOf="@id/btn_to_date_picker_reset"
+            mstb:layout_constraintStart_toStartOf="parent"
+            mstb:layout_constraintTop_toBottomOf="@id/tv_to_year_selected_label" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_to_date_picker_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/dark_gray"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/reset_year"
+            android:textColor="@color/light_gray"
+            mstb:layout_constraintBottom_toBottomOf="@+id/btn_to_date_picker"
+            mstb:layout_constraintEnd_toEndOf="parent"
+            mstb:layout_constraintStart_toEndOf="@id/btn_to_date_picker"
+            mstb:layout_constraintTop_toTopOf="@+id/btn_to_date_picker" />
+
+        <View
+            android:id="@+id/spacer2"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/dark_gray"
+            mstb:layout_constraintBottom_toTopOf="@id/multi_button_launch_outcome"
+            mstb:layout_constraintEnd_toEndOf="parent"
+            mstb:layout_constraintStart_toStartOf="parent"
+            mstb:layout_constraintTop_toBottomOf="@+id/btn_to_date_picker" />
+
+        <org.honorato.multistatetogglebutton.MultiStateToggleButton
+            android:id="@+id/multi_button_launch_outcome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            mstb:layout_constraintBottom_toTopOf="@id/spacer3"
+            mstb:layout_constraintEnd_toEndOf="parent"
+            mstb:layout_constraintStart_toStartOf="parent"
+            mstb:layout_constraintTop_toBottomOf="@id/btn_to_date_picker"
+            mstb:mstbPrimaryColor="@color/light_gray"
+            mstb:mstbSecondaryColor="@color/dark_gray"
+            mstb:values="@array/launch_outcome_array" />
+
+        <View
+            android:id="@+id/spacer3"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/dark_gray"
+            mstb:layout_constraintBottom_toTopOf="@id/multi_button_sorting"
+            mstb:layout_constraintEnd_toEndOf="parent"
+            mstb:layout_constraintStart_toStartOf="parent"
+            mstb:layout_constraintTop_toBottomOf="@+id/multi_button_launch_outcome" />
+
+        <org.honorato.multistatetogglebutton.MultiStateToggleButton
+            android:id="@+id/multi_button_sorting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            mstb:layout_constraintEnd_toEndOf="parent"
+            mstb:layout_constraintStart_toStartOf="parent"
+            mstb:layout_constraintTop_toBottomOf="@id/spacer3"
+            mstb:mstbPrimaryColor="@color/light_gray"
+            mstb:mstbSecondaryColor="@color/dark_gray"
+            mstb:values="@array/order_array" />
+
+        <View
+            android:id="@+id/spacer4"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/dark_gray"
+            mstb:layout_constraintEnd_toEndOf="parent"
+            mstb:layout_constraintStart_toStartOf="parent"
+            mstb:layout_constraintTop_toBottomOf="@+id/multi_button_sorting" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            android:background="@color/dark_gray"
+            android:text="@string/confirm"
+            android:textColor="@color/white"
+            mstb:layout_constraintBottom_toBottomOf="parent"
+            mstb:layout_constraintEnd_toEndOf="parent"
+            mstb:layout_constraintStart_toEndOf="@id/btn_cancel"
+            mstb:layout_constraintTop_toBottomOf="@+id/multi_button_sorting" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_weight="1"
+            android:background="@color/dark_gray"
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            mstb:layout_constraintBottom_toBottomOf="parent"
+            mstb:layout_constraintEnd_toStartOf="@id/btn_confirm"
+            mstb:layout_constraintStart_toStartOf="parent"
+            mstb:layout_constraintTop_toBottomOf="@+id/multi_button_sorting" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
