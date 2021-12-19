@@ -60,7 +60,7 @@ class MainViewModel(
                     viewState = viewState.copy(
                         spaceXInformation = it,
                         isLoading = false,
-                        isDataNotAvailable = it.launches.isNullOrEmpty()
+                        isLaunchesNotAvailable = it.launches.isNullOrEmpty()
                     )
                 }, {
                     viewState = viewState.copy(
@@ -75,10 +75,6 @@ class MainViewModel(
 
     fun openArticle(articleLink: String?) {
         viewState = viewState.copy(isLaunchItemClicked = true, launchArticle = articleLink)
-    }
-
-    fun noLaunchesAvailable() {
-        viewState = viewState.copy(isDataNotAvailable = true)
     }
 
     fun onSortingSelected(sorting: Pair<Sorting?, Int>) {
@@ -136,7 +132,8 @@ class MainViewModel(
 data class MainViewState(
     val spaceXInformation: SpaceXDataModel? = null,
     val isLoading: Boolean = false,
-    val isDataNotAvailable: Boolean = true,
+    val isDataNotAvailable: Boolean = false,
+    val isLaunchesNotAvailable: Boolean = false,
     val isLaunchItemClicked: Boolean? = null,
     val launchArticle: String? = null
 )

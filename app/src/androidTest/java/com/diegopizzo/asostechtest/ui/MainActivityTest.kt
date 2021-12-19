@@ -71,8 +71,8 @@ class MainActivityTest {
     }
 
     @Test
-    fun activityLaunched_emptyResult_checkUiState() {
-        `when`(interactor.getSpaceXInfo()).thenReturn(Single.error(Exception("")))
+    fun activityLaunched_errorResult_checkUiState() {
+        `when`(interactor.getSpaceXInfo()).thenReturn(Single.error(Exception("any error")))
         scenario = launchActivity()
         onView(withId(R.id.toolbar_title)).check(matches(isDisplayed()))
         onView(withId(R.id.company_title)).check(matches(isDisplayed()))
@@ -80,7 +80,24 @@ class MainActivityTest {
         onView(withId(R.id.tv_company_info)).check(matches(isDisplayed()))
 
         onView(withId(R.id.progressBar)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.tv_empty_launches)).check(matches(not(isDisplayed())))
+
         onView(withId(R.id.tv_empty_data)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun activityLaunched_emptyResult_checkUiState() {
+        `when`(interactor.getSpaceXInfo()).thenReturn(Single.just(emptyResult))
+        scenario = launchActivity()
+        onView(withId(R.id.toolbar_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.company_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.launches_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_company_info)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.progressBar)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.tv_empty_data)).check(matches(not(isDisplayed())))
+
+        onView(withId(R.id.tv_empty_launches)).check(matches(isDisplayed()))
     }
 
 
@@ -158,5 +175,8 @@ class MainActivityTest {
 
         private val successResult =
             SpaceXDataModel(companyInfoDataModel, expectedLaunchesDataModel)
+
+        private val emptyResult =
+            SpaceXDataModel(companyInfoDataModel, emptyList())
     }
 }

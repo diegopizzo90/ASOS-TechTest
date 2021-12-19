@@ -55,10 +55,16 @@ class MainFragment : FragmentViewBinding<FragmentMainBinding>(), MainAdapter.Ada
                 companyInfo?.let { info -> setCompanyInfo(info) }
             }
 
-            if (isDataNotAvailable.isTrue()) {
+            if (isDataNotAvailable) {
                 binding.tvEmptyData.visibility = View.VISIBLE
             } else {
                 binding.tvEmptyData.visibility = View.GONE
+            }
+
+            if (isLaunchesNotAvailable) {
+                binding.tvEmptyLaunches.visibility = View.VISIBLE
+            } else {
+                binding.tvEmptyLaunches.visibility = View.GONE
             }
         }
     }
@@ -142,5 +148,6 @@ class MainFragment : FragmentViewBinding<FragmentMainBinding>(), MainAdapter.Ada
     override fun onSuccessListFiltered() {
         binding.tvEmptyLaunches.visibility = View.GONE
         binding.progressBar.visibility = View.GONE
+        binding.tvEmptyLaunches.visibility = View.GONE
     }
 }
