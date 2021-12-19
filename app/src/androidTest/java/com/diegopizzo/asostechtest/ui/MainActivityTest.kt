@@ -80,7 +80,7 @@ class MainActivityTest {
         onView(withId(R.id.tv_company_info)).check(matches(isDisplayed()))
 
         onView(withId(R.id.progressBar)).check(matches(not(isDisplayed())))
-        onView(withId(R.id.tv_empty_launches)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_empty_data)).check(matches(isDisplayed()))
     }
 
 
