@@ -147,7 +147,7 @@ class FilterDialogFragment : DialogFragment() {
             }
 
             btnConfirm.setOnClickListener {
-                viewModel.filterLaunches()
+                viewModel.performFilter()
                 dialog?.cancel()
             }
         }

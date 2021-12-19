@@ -103,7 +103,7 @@ class MainViewModel(
             filterViewState.copy(toYearFilterSelected = year, isFilterPerforming = false)
     }
 
-    fun filterLaunches() {
+    fun performFilter() {
         val oldQuery = filterViewState.queryFilter
         val newQuery = getFilterQuery()
         if (oldQuery != newQuery) {
