@@ -35,6 +35,9 @@ class MainViewModelTest {
     @Mock
     private lateinit var filterViewStateObserver: Observer<FilterDialogViewState>
 
+    @Mock
+    private lateinit var viewEffectObserver: Observer<ViewEffect>
+
     @Before
     fun setUp() {
         viewModel = MainViewModel(
@@ -42,6 +45,7 @@ class MainViewModelTest {
         ).apply {
             viewStates.observeForever(mainViewStateObserver)
             filterViewStates.observeForever(filterViewStateObserver)
+            viewEffects().observeForever(viewEffectObserver)
         }
     }
 
@@ -78,7 +82,7 @@ class MainViewModelTest {
         verify(mainViewStateObserver).onChanged(
             MainViewState(
                 isLoading = true,
-                isDataNotAvailable = false
+                isLaunchesNotAvailable = false
             )
         )
         //Final result
@@ -86,7 +90,7 @@ class MainViewModelTest {
             MainViewState(
                 spaceXInformation = emptyLaunchesResult,
                 isLoading = false,
-                isDataNotAvailable = true
+                isLaunchesNotAvailable = true
             )
         )
     }
@@ -97,7 +101,7 @@ class MainViewModelTest {
 
         viewModel.getSpaceXInformation()
 
-        verify(mainViewStateObserver, times(2)).onChanged(
+        verify(mainViewStateObserver).onChanged(
             MainViewState(
                 spaceXInformation = null,
                 isLoading = false,
@@ -110,8 +114,8 @@ class MainViewModelTest {
     fun openLaunchArticle_onEventPerformed_verifyState() {
         viewModel.openArticle("article")
 
-        verify(mainViewStateObserver).onChanged(
-            MainViewState(isLaunchItemClicked = true, launchArticle = "article")
+        verify(viewEffectObserver).onChanged(
+            ViewEffect.ShowLaunchArticle(articleLink = "article")
         )
     }
 

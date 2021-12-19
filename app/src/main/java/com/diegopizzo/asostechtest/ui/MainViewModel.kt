@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.diegopizzo.asostechtest.ui.FilterObject.LaunchOutcome
 import com.diegopizzo.asostechtest.ui.FilterObject.Sorting
+import com.diegopizzo.asostechtest.ui.ViewEffect.ShowLaunchArticle
+import com.diegopizzo.asostechtest.ui.util.SingleLiveEvent
 import com.diegopizzo.network.interactor.ISpaceXInteractor
 import com.diegopizzo.network.model.SpaceXDataModel
 import io.reactivex.Scheduler
@@ -21,6 +23,9 @@ class MainViewModel(
 
     private val _viewStates: MutableLiveData<MainViewState> = MutableLiveData()
     val viewStates: LiveData<MainViewState> = _viewStates
+
+    private val _viewEffects: SingleLiveEvent<ViewEffect> = SingleLiveEvent()
+    fun viewEffects(): SingleLiveEvent<ViewEffect> = _viewEffects
 
     private var _viewState: MainViewState? = null
     var viewState: MainViewState
@@ -74,7 +79,7 @@ class MainViewModel(
 
 
     fun openArticle(articleLink: String?) {
-        viewState = viewState.copy(isLaunchItemClicked = true, launchArticle = articleLink)
+        viewEffects().value = ShowLaunchArticle(articleLink)
     }
 
     fun onSortingSelected(sorting: Pair<Sorting?, Int>) {
@@ -129,13 +134,15 @@ class MainViewModel(
     }
 }
 
+sealed class ViewEffect {
+    data class ShowLaunchArticle(val articleLink: String?) : ViewEffect()
+}
+
 data class MainViewState(
     val spaceXInformation: SpaceXDataModel? = null,
     val isLoading: Boolean = false,
     val isDataNotAvailable: Boolean = false,
     val isLaunchesNotAvailable: Boolean = false,
-    val isLaunchItemClicked: Boolean? = null,
-    val launchArticle: String? = null
 )
 
 data class FilterDialogViewState(

@@ -13,9 +13,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import com.diegopizzo.asostechtest.R
 import com.diegopizzo.asostechtest.databinding.ActivityMainBinding
 import com.diegopizzo.asostechtest.ui.base.ActivityViewBinding
-import com.diegopizzo.network.base.isTrue
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 
 class MainActivity : ActivityViewBinding<ActivityMainBinding>() {
@@ -29,7 +27,7 @@ class MainActivity : ActivityViewBinding<ActivityMainBinding>() {
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        viewModel.viewStates.observe(this, viewStateObserver)
+        viewModel.viewEffects().observe(this, viewEffectObserver)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -38,16 +36,19 @@ class MainActivity : ActivityViewBinding<ActivityMainBinding>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = (supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment).navController
+        val navController =
+            (supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment).navController
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
-    private val viewStateObserver = Observer<MainViewState> { viewState ->
-        if (viewState.isLaunchItemClicked.isTrue()) {
-            if (viewState.launchArticle == null) {
-                Toast.makeText(this, R.string.not_available_wiki, Toast.LENGTH_LONG).show()
-            } else {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewState.launchArticle)))
+    private val viewEffectObserver = Observer<ViewEffect> { viewEffect ->
+        when (viewEffect) {
+            is ViewEffect.ShowLaunchArticle -> {
+                if (viewEffect.articleLink == null) {
+                    Toast.makeText(this, R.string.not_available_wiki, Toast.LENGTH_LONG).show()
+                } else {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewEffect.articleLink)))
+                }
             }
         }
     }
