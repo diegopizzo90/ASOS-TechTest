@@ -7,7 +7,16 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.diegopizzo.asostechtest.ui.MainFragment"
+        android:name="com.diegopizzo.asostechtest.ui.fragment.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_filterDialogFragment"
+            app:destination="@id/filterDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/filterDialogFragment"
+        android:name="com.diegopizzo.asostechtest.ui.fragment.FilterDialogFragment"
+        android:label="FilterDialogFragment"
+        tools:layout="@layout/fragment_dialog"/>
 </navigation>
