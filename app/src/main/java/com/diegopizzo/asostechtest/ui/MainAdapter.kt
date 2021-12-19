@@ -97,16 +97,20 @@ class MainAdapter(private val context: Context, private val onItemClick: (text: 
                     FilterUtils.getListFilteredFromYearLowerEqualsThan(launchesFiltered, toYear)
             }
 
-            if (launchOutcome == LaunchOutcome.SUCCESS_LAUNCH) {
-                launchesFiltered = FilterUtils.getListFilteredByLaunchOutcome(
-                    launchesFiltered,
-                    isSuccessOutcome = true
-                )
-            } else if (launchOutcome == LaunchOutcome.FAILED_LAUNCH) {
-                launchesFiltered = FilterUtils.getListFilteredByLaunchOutcome(
-                    launchesFiltered,
-                    isSuccessOutcome = false
-                )
+            when (launchOutcome) {
+                LaunchOutcome.SUCCESS_LAUNCH -> {
+                    launchesFiltered = FilterUtils.getListFilteredByLaunchOutcome(
+                        launchesFiltered,
+                        isSuccessOutcome = true
+                    )
+                }
+                LaunchOutcome.FAILED_LAUNCH -> {
+                    launchesFiltered = FilterUtils.getListFilteredByLaunchOutcome(
+                        launchesFiltered,
+                        isSuccessOutcome = false
+                    )
+                }
+                null -> Unit
             }
 
             sorting?.let {

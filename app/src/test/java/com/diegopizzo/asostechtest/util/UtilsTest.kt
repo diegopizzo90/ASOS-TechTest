@@ -72,12 +72,6 @@ class UtilsTest {
         assertEquals(true, isEquals)
     }
 
-    @Test
-    fun getYearFromStringDate_year_assertEqualsTrue() {
-        val year = Utils.getYearFromStringDate("2018-04-02T23:51:00.000Z")
-        assertEquals(2018, year)
-    }
-
     companion object {
         const val DATE_PATTERN = "dd/MM/yyyy"
         const val TIME_PATTERN = "HH:mm"

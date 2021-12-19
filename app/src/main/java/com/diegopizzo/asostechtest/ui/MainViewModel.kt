@@ -148,8 +148,8 @@ data class MainViewState(
 data class FilterDialogViewState(
     val fromYearFilterSelected: Int? = null,
     val toYearFilterSelected: Int? = null,
-    val launchOutcomeFilterSelected: Pair<LaunchOutcome?, Int> = Pair(null, 0),
-    val sortingSelected: Pair<Sorting?, Int> = Pair(null, 0),
+    val launchOutcomeFilterSelected: Pair<LaunchOutcome?, Int> = Pair(null, 0),//(Filter value selected, position in multiButtonView)
+    val sortingSelected: Pair<Sorting?, Int> = Pair(null, 0),//(Filter value selected, position in multiButtonView)
     val queryFilter: FilterObject = FilterObject(),
     val isFilterPerforming: Boolean = false
 )

@@ -46,21 +46,19 @@ object Utils {
             .withZoneSameInstant(ZoneOffset.UTC)
     }
 
-    fun getYearFromStringDate(dateUtc: String): Int {
-        return fromDateStringToZonedDateTimeUtc(dateUtc).year
-    }
-
     fun getActualYear(): Int {
         return ZonedDateTime.now(ZoneId.systemDefault()).year
     }
 
     fun isDateUtcGreaterEqualsThan(fromYear: Int, dateUtcString: String): Boolean {
+        //First day of the specific year
         val fromDate = ZonedDateTime.of(fromYear, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC)
         val dateUtc = fromDateStringToZonedDateTimeUtc(dateUtcString)
         return dateUtc.isAfter(fromDate).or(dateUtc.isEqual(fromDate))
     }
 
     fun isDateUtcLowerEqualsThan(toYear: Int, dateUtcString: String): Boolean {
+        //Last day of the specific year
         val fromDate = ZonedDateTime.of(toYear, 12, 31, 23, 59, 59, 0, ZoneOffset.UTC)
         val dateUtc = fromDateStringToZonedDateTimeUtc(dateUtcString)
         return dateUtc.isBefore(fromDate).or(dateUtc.isEqual(fromDate))
