@@ -13,6 +13,7 @@
     <string name="since">since</string>
     <string name="days_label">Days %s now</string>
     <string name="not_available">N/A</string>
+    <string name="no_data_available">No data available, click here to retry</string>
     <string name="not_available_launches">No launches available</string>
     <string name="not_available_wiki">Wikipedia link not available</string>
     <string name="select_year">Select year</string>

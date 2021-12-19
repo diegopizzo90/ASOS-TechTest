@@ -35,6 +35,7 @@ class MainFragment : FragmentViewBinding<FragmentMainBinding>(), MainAdapter.Ada
         viewModel.viewStates.observe(viewLifecycleOwner, viewStateObserver)
         viewModel.filterViewStates.observe(viewLifecycleOwner, filterViewStateObserver)
         setRecyclerView()
+        onEmptyDataClickListener()
         viewModel.getSpaceXInformation()
     }
 
@@ -54,10 +55,10 @@ class MainFragment : FragmentViewBinding<FragmentMainBinding>(), MainAdapter.Ada
                 companyInfo?.let { info -> setCompanyInfo(info) }
             }
 
-            if (isLaunchesNotAvailable.isTrue()) {
-                binding.tvEmptyLaunches.visibility = View.VISIBLE
+            if (isDataNotAvailable.isTrue()) {
+                binding.tvEmptyData.visibility = View.VISIBLE
             } else {
-                binding.tvEmptyLaunches.visibility = View.GONE
+                binding.tvEmptyData.visibility = View.GONE
             }
         }
     }
@@ -128,8 +129,14 @@ class MainFragment : FragmentViewBinding<FragmentMainBinding>(), MainAdapter.Ada
         mainAdapter?.onAdapterEvent = this
     }
 
+    private fun onEmptyDataClickListener() {
+        binding.tvEmptyData.setOnClickListener {
+            viewModel.retry()
+        }
+    }
+
     override fun onEmptyListFiltered() {
-        viewModel.noLaunchesAvailable()
+        binding.tvEmptyLaunches.visibility = View.VISIBLE
     }
 
     override fun onSuccessListFiltered() {

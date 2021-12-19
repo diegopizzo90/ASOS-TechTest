@@ -48,25 +48,25 @@ class MainViewModel(
         filterViewState = FilterDialogViewState()
     }
 
-    fun getSpaceXInformation() {
+    fun getSpaceXInformation(isFresh: Boolean = false) {
         disposables.add(
             interactor.getSpaceXInfo()
                 .subscribeOn(subscriberScheduler)
                 .observeOn(observerScheduler)
                 .doOnSubscribe {
-                    viewState = viewState.copy(isLoading = true, isLaunchesNotAvailable = false)
+                    viewState = viewState.copy(isLoading = true, isDataNotAvailable = false)
                 }
                 .subscribe({
                     viewState = viewState.copy(
                         spaceXInformation = it,
                         isLoading = false,
-                        isLaunchesNotAvailable = it.launches.isNullOrEmpty()
+                        isDataNotAvailable = it.launches.isNullOrEmpty()
                     )
                 }, {
                     viewState = viewState.copy(
                         spaceXInformation = null,
                         isLoading = false,
-                        isLaunchesNotAvailable = true
+                        isDataNotAvailable = true
                     )
                 })
         )
@@ -78,7 +78,7 @@ class MainViewModel(
     }
 
     fun noLaunchesAvailable() {
-        viewState = viewState.copy(isLaunchesNotAvailable = true)
+        viewState = viewState.copy(isDataNotAvailable = true)
     }
 
     fun onSortingSelected(sorting: Pair<Sorting?, Int>) {
@@ -123,6 +123,10 @@ class MainViewModel(
         }
     }
 
+    fun retry() {
+        getSpaceXInformation(isFresh = true)
+    }
+
     override fun onCleared() {
         super.onCleared()
         disposables.clear()
@@ -132,7 +136,7 @@ class MainViewModel(
 data class MainViewState(
     val spaceXInformation: SpaceXDataModel? = null,
     val isLoading: Boolean = false,
-    val isLaunchesNotAvailable: Boolean = true,
+    val isDataNotAvailable: Boolean = true,
     val isLaunchItemClicked: Boolean? = null,
     val launchArticle: String? = null
 )

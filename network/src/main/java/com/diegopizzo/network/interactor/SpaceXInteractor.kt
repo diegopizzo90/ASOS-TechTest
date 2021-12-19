@@ -13,32 +13,33 @@ internal class SpaceXInteractor(
     private val creator: ISpaceXCreator
 ) : ISpaceXInteractor, BaseInteractor() {
 
-    override fun getSpaceXInfo(): Single<SpaceXDataModel> {
+    override fun getSpaceXInfo(isFresh: Boolean): Single<SpaceXDataModel> {
         val zipper =
             BiFunction<CompanyInfoDataModel, List<LaunchDataModel>, SpaceXDataModel> { companyInfoResult, launches ->
                 creator.fromModelToDataModel(companyInfoResult, launches)
             }
 
-        return Single.zip(getCompanyInfo(), getLaunches(), zipper).onErrorReturn {
-            SpaceXDataModel(null, emptyList())
-        }
+        return Single.zip(getCompanyInfo(isFresh), getLaunches(isFresh), zipper)
     }
 
-    private fun getLaunches(): Single<List<LaunchDataModel>> {
-        return cache.getLaunches().flatMap {
+    private fun getLaunches(isFresh: Boolean): Single<List<LaunchDataModel>> {
+        return cache.getLaunches(isFresh).flatMap {
             when (val result = handleResponse(it)) {
-                is Result.Success -> mergeListOfLaunchesWithRocketDetails(result.data)
-                is Result.Error -> mergeListOfLaunchesWithRocketDetails(emptyList())
+                is Result.Success -> mergeListOfLaunchesWithRocketDetails(result.data, isFresh)
+                is Result.Error -> mergeListOfLaunchesWithRocketDetails(emptyList(), isFresh)
             }
         }
     }
 
-    private fun mergeListOfLaunchesWithRocketDetails(launches: List<Launch>?): Single<List<LaunchDataModel>>? {
-        return Single.merge(getLaunchesWithRocketDetailsAdded(launches)).toList()
+    private fun mergeListOfLaunchesWithRocketDetails(
+        launches: List<Launch>?,
+        isFresh: Boolean
+    ): Single<List<LaunchDataModel>>? {
+        return Single.merge(getLaunchesWithRocketDetailsAdded(launches, isFresh)).toList()
     }
 
-    private fun getCompanyInfo(): Single<CompanyInfoDataModel> {
-        return cache.getCompanyInfo().map {
+    private fun getCompanyInfo(isFresh: Boolean): Single<CompanyInfoDataModel> {
+        return cache.getCompanyInfo(isFresh).map {
             when (val result = handleResponse(it)) {
                 is Result.Success -> creator.fromCompanyInfoToDataModel(result.data)
                 is Result.Error -> creator.fromCompanyInfoToDataModel(null)
@@ -46,15 +47,25 @@ internal class SpaceXInteractor(
         }
     }
 
-    private fun getLaunchesWithRocketDetailsAdded(launches: List<Launch>?): List<Single<LaunchDataModel>>? {
-        return launches?.map { launch -> getSingleLaunchWithRocketDetails(launch.rocket, launch) }
+    private fun getLaunchesWithRocketDetailsAdded(
+        launches: List<Launch>?,
+        isFresh: Boolean
+    ): List<Single<LaunchDataModel>>? {
+        return launches?.map { launch ->
+            getSingleLaunchWithRocketDetails(
+                launch.rocket,
+                launch,
+                isFresh
+            )
+        }
     }
 
     private fun getSingleLaunchWithRocketDetails(
         rocketId: String,
-        launch: Launch
+        launch: Launch,
+        isFresh: Boolean
     ): Single<LaunchDataModel> {
-        return getRocketById(rocketId).map { result ->
+        return getRocketById(rocketId, isFresh).map { result ->
             when (result) {
                 is Result.Success -> creator.fromLaunchesModelToDataModel(launch, result.data)
                 is Result.Error -> creator.fromLaunchesModelToDataModel(launch, null)
@@ -62,7 +73,7 @@ internal class SpaceXInteractor(
         }
     }
 
-    private fun getRocketById(id: String): Single<Result<Rocket>> {
-        return cache.getRocketById(id).map { handleResponse(it) }
+    private fun getRocketById(id: String, isFresh: Boolean): Single<Result<Rocket>> {
+        return cache.getRocketById(id, isFresh).map { handleResponse(it) }
     }
 }

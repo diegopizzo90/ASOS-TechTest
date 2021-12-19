@@ -55,7 +55,7 @@ class MainViewModelTest {
         verify(mainViewStateObserver).onChanged(
             MainViewState(
                 isLoading = true,
-                isLaunchesNotAvailable = false
+                isDataNotAvailable = false
             )
         )
         //Final result
@@ -63,7 +63,7 @@ class MainViewModelTest {
             MainViewState(
                 spaceXInformation = successResult,
                 isLoading = false,
-                isLaunchesNotAvailable = false
+                isDataNotAvailable = false
             )
         )
     }
@@ -78,7 +78,7 @@ class MainViewModelTest {
         verify(mainViewStateObserver).onChanged(
             MainViewState(
                 isLoading = true,
-                isLaunchesNotAvailable = false
+                isDataNotAvailable = false
             )
         )
         //Final result
@@ -86,7 +86,7 @@ class MainViewModelTest {
             MainViewState(
                 spaceXInformation = emptyLaunchesResult,
                 isLoading = false,
-                isLaunchesNotAvailable = true
+                isDataNotAvailable = true
             )
         )
     }
@@ -101,7 +101,7 @@ class MainViewModelTest {
             MainViewState(
                 spaceXInformation = null,
                 isLoading = false,
-                isLaunchesNotAvailable = true
+                isDataNotAvailable = true
             )
         )
     }
@@ -112,15 +112,6 @@ class MainViewModelTest {
 
         verify(mainViewStateObserver).onChanged(
             MainViewState(isLaunchItemClicked = true, launchArticle = "article")
-        )
-    }
-
-    @Test
-    fun noLaunchesAvailable_onEventPerformed_verifyState() {
-        viewModel.noLaunchesAvailable()
-
-        verify(mainViewStateObserver, times(2)).onChanged(
-            MainViewState(isLaunchesNotAvailable = true)
         )
     }
 
