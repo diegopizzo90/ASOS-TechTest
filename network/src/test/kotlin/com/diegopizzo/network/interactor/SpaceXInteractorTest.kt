@@ -10,8 +10,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.anyString
+import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 import retrofit2.Response
 
@@ -30,7 +29,9 @@ class SpaceXInteractorTest {
 
     @Test
     fun getSpaceXInfo_successResult_assertEqualsTrue() {
-        `when`(cache.getRocketById(anyString())).thenReturn(Single.just(rocketSuccess))
+        `when`(
+            cache.getRocketById(anyString(), anyBoolean())
+        ).thenReturn(Single.just(rocketSuccess))
         `when`(cache.getLaunches()).thenReturn(Single.just(launchesSuccess))
         `when`(cache.getCompanyInfo()).thenReturn(Single.just(companyInfoSuccess))
 
@@ -62,7 +63,7 @@ class SpaceXInteractorTest {
 
     @Test
     fun getSpaceXInfo_serverErrorOnCompanyInfoEndpoint_assertEqualsTrue() {
-        `when`(cache.getRocketById(anyString())).thenReturn(Single.just(rocketSuccess))
+        `when`(cache.getRocketById(anyString(), anyBoolean())).thenReturn(Single.just(rocketSuccess))
         `when`(cache.getLaunches()).thenReturn(Single.just(launchesSuccess))
         `when`(cache.getCompanyInfo()).thenReturn(
             Single.just(Response.error(500, "body".toResponseBody()))
@@ -74,7 +75,7 @@ class SpaceXInteractorTest {
 
     @Test
     fun getSpaceXInfo_clientErrorOnCompanyInfoEndpoint_assertEqualsTrue() {
-        `when`(cache.getRocketById(anyString())).thenReturn(Single.just(rocketSuccess))
+        `when`(cache.getRocketById(anyString(), anyBoolean())).thenReturn(Single.just(rocketSuccess))
         `when`(cache.getLaunches()).thenReturn(Single.just(launchesSuccess))
         `when`(cache.getCompanyInfo()).thenReturn(
             Single.just(Response.error(400, "body".toResponseBody()))
@@ -86,7 +87,7 @@ class SpaceXInteractorTest {
 
     @Test
     fun getSpaceXInfo_serverErrorOnRocketInfoEndpoint_assertEqualsTrue() {
-        `when`(cache.getRocketById(anyString())).thenReturn(
+        `when`(cache.getRocketById(anyString(), anyBoolean())).thenReturn(
             Single.just(
                 Response.error(
                     500,
@@ -103,7 +104,7 @@ class SpaceXInteractorTest {
 
     @Test
     fun getSpaceXInfo_clientErrorOnRocketInfoEndpoint_assertEqualsTrue() {
-        `when`(cache.getRocketById(anyString())).thenReturn(
+        `when`(cache.getRocketById(anyString(), anyBoolean())).thenReturn(
             Single.just(
                 Response.error(
                     500,
