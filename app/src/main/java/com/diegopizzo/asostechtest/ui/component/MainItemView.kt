@@ -5,7 +5,6 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ImageView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
@@ -123,7 +122,9 @@ class MainItemView(context: Context, attrs: AttributeSet) : ConstraintLayout(con
             tvLabelText7.text = labelText7
             tvLabelText8.text = labelText8
             if (smallIconRes != null) {
-                ivSmallIcon.setImageDrawable(AppCompatResources.getDrawable(context, smallIconRes))
+                Glide.with(this@MainItemView).load(smallIconRes)
+                    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                    .into(ivSmallIcon)
             } else {
                 ivSmallIcon.visibility = GONE
             }
