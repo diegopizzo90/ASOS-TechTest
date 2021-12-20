@@ -17,7 +17,7 @@ Koin is a framework for the dependency injection.\
 Link: https://github.com/InsertKoinIO/koin
 
 **Retrofit**  
-HTTP client used the make API Requests and retrieve the data from network.\
+HTTP client used to make API Requests and retrieve the data from network.\
 Link: https://square.github.io/retrofit/
 
 **RxJava**  
@@ -48,8 +48,7 @@ Link: https://github.com/JakeWharton/ThreeTenABP
 
 **MonthAndYearPicker**\
 Library that allows users to open a date picker customizable with only month and year or only month
-or only year as required. Used into filter dialog screen to pick the range of years desired. section
-of year.\
+or only year as required. Used into filter dialog screen to pick the range of years desired.\
 Link: https://github.com/premkumarroyal/MonthAndYearPicker
 
 **MultiStateToggleButton**\
