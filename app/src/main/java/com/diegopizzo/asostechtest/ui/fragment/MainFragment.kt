@@ -151,4 +151,9 @@ class MainFragment : FragmentViewBinding<FragmentMainBinding>(), MainAdapter.Ada
         binding.progressBar.visibility = View.GONE
         binding.tvEmptyLaunches.visibility = View.GONE
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mainAdapter?.onAdapterEvent = null
+    }
 }

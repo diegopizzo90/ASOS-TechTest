@@ -109,7 +109,7 @@ class MainItemView(context: Context, attrs: AttributeSet) : ConstraintLayout(con
     ) {
         binding.apply {
             Glide.with(this@MainItemView).load(iconImageUrl)
-                .placeholder(R.drawable.ic_close_black)
+                .placeholder(R.drawable.ic_question_mark_black)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(ivIcon)
 
@@ -122,11 +122,11 @@ class MainItemView(context: Context, attrs: AttributeSet) : ConstraintLayout(con
             tvLabelText7.text = labelText7
             tvLabelText8.text = labelText8
 
-            Glide.with(this@MainItemView)
-                .load(smallIconRes)
-                .placeholder(R.drawable.ic_question_mark_black)
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .into(ivSmallIcon)
+            if (smallIconRes != null) {
+                ivSmallIcon.setImageResource(smallIconRes)
+            } else {
+                ivSmallIcon.setImageResource(R.drawable.ic_question_mark_black)
+            }
         }
     }
 }
